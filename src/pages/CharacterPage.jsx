@@ -38,6 +38,7 @@ export default function BioCharacterPage() {
   return (
     <main className="bio-space">
       <h2>{name}</h2>
+
       <div className="wrapper">
         <div className="bio-card-left">
           <img src={picture} alt="" />

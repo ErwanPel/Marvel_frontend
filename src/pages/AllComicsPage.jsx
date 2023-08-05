@@ -9,6 +9,8 @@ export default function AllComicsPage() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [selectPage, setSelectPage] = useState();
 
   const fetchData = async () => {
     try {
@@ -17,9 +19,10 @@ export default function AllComicsPage() {
         title = `&title=${search}`;
       }
       const { data } = await axios.get(
-        `https://site--marvel-backend--fwddjdqr85yq.code.run/comics?page=1${title}`
+        `https://site--marvel-backend--fwddjdqr85yq.code.run/comics?page=${page}${title}`
       );
       setData(data);
+      setSelectPage(Array.from(Array(Math.ceil(data.count / 100)).keys()));
       setIsLoading(false);
     } catch (error) {
       console.log(error.response);
@@ -29,23 +32,27 @@ export default function AllComicsPage() {
   useEffect(() => {
     console.log("useEffect characters activated");
     fetchData();
-  }, [search]);
+  }, [search, page]);
 
   return (
     <>
-      {" "}
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-        label="Recherche par comics 📕 :"
-      />
-      <main>
-        {isLoading ? (
-          <p className="wrapper">Downloading ...</p>
-        ) : (
+      {isLoading ? (
+        <p className="wrapper">Downloading ...</p>
+      ) : (
+        <>
+          <SearchBar
+            search={search}
+            setSearch={setSearch}
+            label="Recherche par comics 📕 :"
+            placeholder="ex : spider man, 100#, ..."
+            page={page}
+            setPage={setPage}
+            selectPage={selectPage}
+          />
+
           <Cards data={data} path={/comic/} />
-        )}
-      </main>
+        </>
+      )}
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 import AllCharactersPage from "./pages/AllCharactersPage";
 import Header from "./components/Header";
@@ -7,6 +8,22 @@ import ComicPage from "./pages/ComicPage";
 import AllComicsPage from "./pages/AllComicsPage";
 
 import "./assets/css/App.css";
+
+import {
+  faChevronRight,
+  faChevronLeft,
+  faAnglesRight,
+  faAnglesLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
+library.add(
+  faChevronRight,
+  faChevronLeft,
+  faAnglesRight,
+  faAnglesLeft,
+  faHeart
+);
 
 function App() {
   return (
