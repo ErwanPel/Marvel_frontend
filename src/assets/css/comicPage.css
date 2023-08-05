@@ -1,0 +1,37 @@
+main.comic-page {
+  height: 100vh;
+}
+
+.comic-bloc {
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  width: 65rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.comic-bloc > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.comic-bloc > :last-child {
+  padding: 4rem;
+  text-align: center;
+}
+
+.section-to-complete {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  height: 100%;
+}
+
+.section-to-complete p {
+  font-size: 2.8rem;
+}

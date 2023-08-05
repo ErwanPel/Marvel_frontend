@@ -1,0 +1,19 @@
+.search-bloc {
+  padding: 2rem;
+  text-align: center;
+  position: sticky;
+  top: 0px;
+  background-color: black;
+  border-bottom: 1px solid red;
+}
+
+.search-bloc label {
+  color: whitesmoke;
+  font-size: 1.8rem;
+}
+
+.search-bloc input {
+  width: 30rem;
+  height: 3rem;
+  margin-left: 2rem;
+}
