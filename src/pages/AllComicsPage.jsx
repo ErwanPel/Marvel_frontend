@@ -12,9 +12,7 @@ export default function AllComicsPage({ loginModal, signModal }) {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selectPage, setSelectPage] = useState();
-  const [cookiesComics, setCookiesComics] = useState(
-    JSON.parse(Cookies.get("comics")) || []
-  );
+  const [cookiesComics, setCookiesComics] = useState([]);
 
   const fetchData = async () => {
     try {

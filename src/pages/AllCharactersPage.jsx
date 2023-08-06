@@ -12,9 +12,7 @@ export default function CharactersPage({ loginModal, signModal }) {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selectPage, setSelectPage] = useState();
-  const [cookiesChar, setCookiesChar] = useState(
-    JSON.parse(Cookies.get("characters")) || []
-  );
+  const [cookiesChar, setCookiesChar] = useState([]);
 
   const fetchData = async () => {
     try {
