@@ -19,7 +19,7 @@ export default function Cards({
 
   const handleFav = (id, favData, event) => {
     event.preventDefault();
-    if (favData.title) {
+    if (favData?.title) {
       if (Cookies.get("comics")) {
         let array = JSON.parse(Cookies.get("comics"));
 

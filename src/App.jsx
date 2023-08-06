@@ -59,10 +59,15 @@ function App() {
         />
         <Route path="/comic/:comicId" element={<ComicPage />} />
       </Routes>
-      {(loginModal || signModal) && (
+      {loginModal && (
         <Modal
           loginModal={loginModal}
           setLoginModal={setLoginModal}
+          setToken={setToken}
+        />
+      )}
+      {signModal && (
+        <Modal
           signModal={signModal}
           setSignModal={setSignModal}
           setToken={setToken}
