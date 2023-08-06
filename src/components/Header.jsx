@@ -32,23 +32,25 @@ export default function Header({
         <img src={Logo} alt="Logo marvel écrit en blanc sur fond rouge" />
       </Link>
       <div>
-        {!token ? (
-          <>
-            <button onClick={getSignUp}>S'INSCRIRE</button>
-            <button onClick={getLogin}>SE CONNECTER</button>
-          </>
-        ) : (
-          <button onClick={removeToken}>DECONNEXION</button>
-        )}
-      </div>
+        <div>
+          {!token ? (
+            <>
+              <button onClick={getSignUp}>S'INSCRIRE</button>
+              <button onClick={getLogin}>SE CONNECTER</button>
+            </>
+          ) : (
+            <button onClick={removeToken}>DECONNEXION</button>
+          )}
+        </div>
 
-      <div>
-        <Link to="/">
-          <button>PERSONNAGES</button>
-        </Link>
-        <Link to="/comics">
-          <button>COMICS</button>
-        </Link>
+        <div>
+          <Link to="/">
+            <button>PERSONNAGES</button>
+          </Link>
+          <Link to="/comics">
+            <button>COMICS</button>
+          </Link>
+        </div>
       </div>
     </header>
   );

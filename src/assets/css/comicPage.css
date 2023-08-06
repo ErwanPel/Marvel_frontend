@@ -35,3 +35,10 @@ main.comic-page {
 .section-to-complete p {
   font-size: 2.8rem;
 }
+
+@media (max-width: 830px) {
+  .comic-bloc {
+    flex-direction: column;
+    width: 34rem;
+  }
+}

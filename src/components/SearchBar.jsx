@@ -12,7 +12,13 @@ export default function SearchBar({
   signModal,
 }) {
   return (
-    <div className={loginModal || signModal ? "no-sticky-bloc" : "sticky-bloc"}>
+    <div
+      className={
+        loginModal || signModal
+          ? "search-page-bloc"
+          : "search-page-bloc sticky-bloc"
+      }
+    >
       <div className="search-bloc">
         <label htmlFor="search">{label}</label>
         <input
@@ -26,20 +32,16 @@ export default function SearchBar({
         />{" "}
       </div>
       <div className="select-bloc">
-        {page > 1 && (
-          <FontAwesomeIcon
-            className="chevron"
-            icon="angles-left"
-            onClick={() => setPage(1)}
-          />
-        )}
-        {page > 1 && (
-          <FontAwesomeIcon
-            className="chevron"
-            icon="chevron-left"
-            onClick={() => setPage(page - 1)}
-          />
-        )}
+        <FontAwesomeIcon
+          className={page > 1 ? "chevron" : "unvisible"}
+          icon="angles-left"
+          onClick={() => setPage(1)}
+        />
+        <FontAwesomeIcon
+          className={page > 1 ? "chevron" : "unvisible"}
+          icon="chevron-left"
+          onClick={() => setPage(page - 1)}
+        />
         <select
           name="page"
           id="page"
@@ -54,20 +56,18 @@ export default function SearchBar({
             );
           })}
         </select>
-        {page < selectPage.length && (
-          <FontAwesomeIcon
-            className="chevron"
-            icon="chevron-right"
-            onClick={() => setPage(page + 1)}
-          />
-        )}
-        {page < selectPage.length && (
-          <FontAwesomeIcon
-            className="chevron"
-            icon="angles-right"
-            onClick={() => setPage(selectPage.length)}
-          />
-        )}
+
+        <FontAwesomeIcon
+          className={page < selectPage.length ? "chevron" : "unvisible"}
+          icon="chevron-right"
+          onClick={() => setPage(page + 1)}
+        />
+
+        <FontAwesomeIcon
+          className={page < selectPage.length ? "chevron" : "unvisible"}
+          icon="angles-right"
+          onClick={() => setPage(selectPage.length)}
+        />
       </div>
     </div>
   );

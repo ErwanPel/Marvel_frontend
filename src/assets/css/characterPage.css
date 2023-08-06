@@ -63,3 +63,24 @@
   transition: 0.5s;
   background-color: rgb(238, 209, 209);
 }
+
+@media (max-width: 1140px) {
+  .bio-card-right {
+    width: 34rem;
+  }
+  .comic-bio-card {
+    width: calc((100% - 4rem) / 2);
+  }
+}
+
+@media (max-width: 830px) {
+  .bio-space div.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .comic-bio-card {
+    width: 100%;
+  }
+}

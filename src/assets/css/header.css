@@ -5,6 +5,10 @@ header {
   justify-content: space-around;
 }
 
+header > div:first-of-type {
+  display: flex;
+}
+
 header img {
   width: 20rem;
 }
@@ -22,4 +26,29 @@ header button {
 header button:hover {
   background-color: rgb(236, 232, 232);
   transition: 0.5s;
+}
+
+@media (max-width: 1140px) {
+  header {
+    height: fit-content;
+    padding-block: 3rem;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  header button {
+    font-size: 1.8rem;
+  }
+
+  header img {
+    width: 17rem;
+  }
+}
+
+@media (max-width: 830px) {
+  header button {
+    padding: 1rem;
+    font-size: 1.4rem;
+    margin-inline: 1rem;
+  }
 }
