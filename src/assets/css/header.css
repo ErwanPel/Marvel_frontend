@@ -1,6 +1,5 @@
 header {
   height: 15rem;
-  background-color: black;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -11,9 +10,16 @@ header img {
 }
 
 header button {
-  margin-right: 4rem;
+  padding: 2rem;
   background-color: inherit;
-  color: red;
+  border-radius: 50%;
+  color: rgb(229, 38, 38);
   border: none;
   font-size: 2rem;
+  margin-right: 4rem;
+}
+
+header button:hover {
+  background-color: rgb(236, 232, 232);
+  transition: 0.5s;
 }

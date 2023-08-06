@@ -8,9 +8,11 @@ export default function SearchBar({
   page,
   setPage,
   selectPage,
+  loginModal,
+  signModal,
 }) {
   return (
-    <div className="sticky-bloc">
+    <div className={loginModal || signModal ? "no-sticky-bloc" : "sticky-bloc"}>
       <div className="search-bloc">
         <label htmlFor="search">{label}</label>
         <input

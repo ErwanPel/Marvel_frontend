@@ -2,15 +2,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cards from "../components/Cards";
 import SearchBar from "../components/SearchBar";
+import Cookies from "js-cookie";
 
 import "../assets/css/searchBar.css";
 
-export default function CharactersPage() {
+export default function CharactersPage({ loginModal, signModal }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selectPage, setSelectPage] = useState();
+  const [cookiesChar, setCookiesChar] = useState(
+    JSON.parse(Cookies.get("characters")) || []
+  );
 
   const fetchData = async () => {
     try {
@@ -33,7 +37,7 @@ export default function CharactersPage() {
   useEffect(() => {
     console.log("useEffect characters activated");
     fetchData();
-  }, [search, page]);
+  }, [search, page, cookiesChar]);
 
   return (
     <>
@@ -49,8 +53,18 @@ export default function CharactersPage() {
             page={page}
             setPage={setPage}
             selectPage={selectPage}
+            loginModal={loginModal}
+            signModal={signModal}
           />
-          <Cards data={data} path="/" />
+          <Cards
+            data={data}
+            cookiesChar={cookiesChar}
+            setCookiesChar={setCookiesChar}
+            loginModal={loginModal}
+            signModal={signModal}
+            path="/"
+            cookiesSort={cookiesChar}
+          />
         </>
       )}
     </>

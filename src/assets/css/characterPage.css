@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  background-color: whitesmoke;
+  background-color: rgb(236, 232, 232);
   width: 34rem;
   height: fit-content;
 }
@@ -32,7 +32,7 @@
   flex-direction: column;
   width: 60rem;
   padding: 2rem;
-  background-color: whitesmoke;
+  background-color: rgb(236, 232, 232);
 }
 
 .bio-card-right > div {
@@ -57,4 +57,9 @@
 
 .comic-bio-card p {
   font-size: 1.2rem;
+}
+
+.comic-bio-card:hover {
+  transition: 0.5s;
+  background-color: rgb(238, 209, 209);
 }
