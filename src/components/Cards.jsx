@@ -88,7 +88,7 @@ export default function Cards({
                     ? "favorite"
                     : "favorite  full-heart")
                 }
-                // onClick={(event) => handleFav(element._id, element, event)}
+                onClick={(event) => handleFav(element._id, element, event)}
               >
                 <FontAwesomeIcon className="heart" icon="fa-regular fa-heart" />
               </div>
