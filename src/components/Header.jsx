@@ -12,6 +12,10 @@ export default function Header({
   setSignModal,
   token,
   setToken,
+  cookiesChar,
+  setCookiesChar,
+  cookiesComics,
+  setCookiesComics,
 }) {
   const getSignUp = () => {
     setSignModal(!signModal);
@@ -23,6 +27,8 @@ export default function Header({
 
   const removeToken = () => {
     Cookies.remove("token");
+    setCookiesChar([]);
+    setCookiesComics([]);
     setToken("");
   };
 

@@ -32,6 +32,8 @@ function App() {
   const [loginModal, setLoginModal] = useState(false);
   const [signModal, setSignModal] = useState(false);
   const [token, setToken] = useState(Cookies.get("token") || "");
+  const [cookiesComics, setCookiesComics] = useState([]);
+  const [cookiesChar, setCookiesChar] = useState([]);
 
   return (
     <Router>
@@ -42,19 +44,35 @@ function App() {
         setSignModal={setSignModal}
         token={token}
         setToken={setToken}
+        cookiesComics={cookiesComics}
+        setCookiesComics={setCookiesComics}
+        cookiesChar={cookiesChar}
+        setCookiesChar={setCookiesChar}
       />
       <Routes>
         <Route
           path="/"
           element={
-            <AllCharactersPage loginModal={loginModal} signModal={signModal} />
+            <AllCharactersPage
+              loginModal={loginModal}
+              signModal={signModal}
+              token={token}
+              cookiesChar={cookiesChar}
+              setCookiesChar={setCookiesChar}
+            />
           }
         />
         <Route path="/:characterId" element={<CharacterPage />} />
         <Route
           path="/comics"
           element={
-            <AllComicsPage loginModal={loginModal} signModal={signModal} />
+            <AllComicsPage
+              loginModal={loginModal}
+              signModal={signModal}
+              token={token}
+              cookiesComics={cookiesComics}
+              setCookiesComics={setCookiesComics}
+            />
           }
         />
         <Route path="/comic/:comicId" element={<ComicPage />} />
