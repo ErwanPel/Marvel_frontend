@@ -36,7 +36,8 @@
 }
 
 .card > :nth-child(2) {
-  width: fit-content;
+  width: 20rem;
+  text-align: center;
 }
 
 .to-complete {

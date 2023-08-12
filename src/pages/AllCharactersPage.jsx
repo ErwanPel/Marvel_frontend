@@ -27,7 +27,6 @@ export default function CharactersPage({
         { headers: { authorization: `Bearer ${token}` } }
       );
 
-      console.log("get fav", response.data.characters);
       if (response.data.characters !== undefined) {
         setCookiesChar(response.data.characters);
       }
@@ -49,6 +48,8 @@ export default function CharactersPage({
   //   }
   // }, [Cookies.get("characters")]);
 
+  let array = [];
+
   const fetchData = async () => {
     try {
       let name = "";
@@ -60,6 +61,7 @@ export default function CharactersPage({
       );
       setData(data);
       setSelectPage(Array.from(Array(Math.ceil(data.count / 100)).keys()));
+
       setIsLoading(false);
     } catch (error) {
       console.log(error.response);
@@ -76,16 +78,22 @@ export default function CharactersPage({
         <p className="wrapper">Downloading ...</p>
       ) : (
         <>
+          {data.results.map((item) => {
+            array.push(item.name.split("(")[0].trim());
+            let sortArray = new Set(array);
+            array = Array.from(sortArray);
+          })}
           <SearchBar
             search={search}
             setSearch={setSearch}
             label="Recherche par personnages 🦸‍♂️ :"
-            placeholder="ex : spider man, iron man, ..."
+            placeholder="ex : spider-man, iron man, ..."
             page={page}
             setPage={setPage}
             selectPage={selectPage}
             loginModal={loginModal}
             signModal={signModal}
+            array={array}
           />
           <Cards
             data={data}

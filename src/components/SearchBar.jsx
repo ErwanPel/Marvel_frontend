@@ -10,7 +10,12 @@ export default function SearchBar({
   selectPage,
   loginModal,
   signModal,
+  array,
 }) {
+  const getItem = (item) => {
+    setSearch(() => item);
+  };
+
   return (
     <div
       className={
@@ -21,15 +26,38 @@ export default function SearchBar({
     >
       <div className="search-bloc">
         <label htmlFor="search">{label}</label>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          placeholder={placeholder}
-          onChange={(event) => setSearch(event.target.value)}
-          value={search}
-          autoComplete="on"
-        />{" "}
+        <div className="autocomplete-bloc">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder={placeholder}
+            onChange={(event) => {
+              setSearch(event.target.value);
+              setPage(1);
+            }}
+            value={search}
+          />
+          <div className="autocomplete-list">
+            {array.map((item, index) => {
+              let regex = new RegExp(search, "i");
+
+              if (search.length > 0) {
+                if (item.match(regex)) {
+                  return (
+                    <div
+                      className="item"
+                      key={index}
+                      onClick={() => getItem(item)}
+                    >
+                      {item}
+                    </div>
+                  );
+                }
+              }
+            })}
+          </div>
+        </div>
       </div>
       <div className="select-bloc">
         <FontAwesomeIcon

@@ -18,8 +18,6 @@ export default function Cards({
   cookiesSort,
   token,
 }) {
-  console.log(cookiesSort);
-
   // ----------------- METHOD TO SAVE WITH DATABASE -----------------------------
 
   const sendFav = async (data) => {
@@ -131,45 +129,49 @@ export default function Cards({
 
   return (
     <main className="wrapper cards-bloc">
-      {data.results.map((element) => {
-        let picture = `${element.thumbnail.path}/portrait_large.${element.thumbnail.extension}`;
+      {data.results.length > 0 ? (
+        data.results.map((element) => {
+          let picture = `${element.thumbnail.path}/portrait_large.${element.thumbnail.extension}`;
 
-        return (
-          <Link
-            key={element._id}
-            to={`${path}${element._id}`}
-            state={{ data: element }}
-            className="card"
-          >
-            <div
-              className={
-                ((loginModal || signModal) &&
-                  "favorite-modal" &&
-                  (cookiesSort.indexOf(element._id) === -1
-                    ? "favorite-modal"
-                    : "favorite-modal  full-heart-modal")) ||
-                (cookiesSort.indexOf(element._id) === -1
-                  ? "favorite"
-                  : "favorite  full-heart")
-              }
-              onClick={
-                token
-                  ? (event) => handleFav(element._id, element, event)
-                  : displayModal
-              }
+          return (
+            <Link
+              key={element._id}
+              to={`${path}${element._id}`}
+              state={{ data: element }}
+              className="card"
             >
-              <FontAwesomeIcon className="heart" icon="fa-regular fa-heart" />
-            </div>
-            <p>{element.name || element.title}</p>
-            {picture && <img src={picture} alt="picture of a hero" />}
-            {element.description ? (
-              <p className="card-description">{element.description}</p>
-            ) : (
-              <p className="to-complete">Need to be completed !</p>
-            )}
-          </Link>
-        );
-      })}
+              <div
+                className={
+                  ((loginModal || signModal) &&
+                    "favorite-modal" &&
+                    (cookiesSort.indexOf(element._id) === -1
+                      ? "favorite-modal"
+                      : "favorite-modal  full-heart-modal")) ||
+                  (cookiesSort.indexOf(element._id) === -1
+                    ? "favorite"
+                    : "favorite  full-heart")
+                }
+                onClick={
+                  token
+                    ? (event) => handleFav(element._id, element, event)
+                    : displayModal
+                }
+              >
+                <FontAwesomeIcon className="heart" icon="fa-regular fa-heart" />
+              </div>
+              <p>{element.name || element.title}</p>
+              {picture && <img src={picture} alt="picture of a hero" />}
+              {element.description ? (
+                <p className="card-description">{element.description}</p>
+              ) : (
+                <p className="to-complete">Need to be completed !</p>
+              )}
+            </Link>
+          );
+        })
+      ) : (
+        <p className="section-to-complete">Sorry but nothing is find</p>
+      )}
     </main>
   );
 }

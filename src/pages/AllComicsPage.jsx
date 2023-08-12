@@ -70,22 +70,30 @@ export default function AllComicsPage({
     fetchData();
   }, [search, page, cookiesComics]);
 
+  let array = [];
+
   return (
     <>
       {isLoading ? (
         <p className="wrapper">Downloading ...</p>
       ) : (
         <>
+          {data.results.map((item) => {
+            array.push(item.title.split("(")[0].trim());
+            let sortArray = new Set(array);
+            array = Array.from(sortArray);
+          })}
           <SearchBar
             search={search}
             setSearch={setSearch}
             label="Recherche par comics 📕 :"
-            placeholder="ex : spider man, 100#, ..."
+            placeholder="ex : spider-man, 100#, ..."
             page={page}
             setPage={setPage}
             selectPage={selectPage}
             loginModal={loginModal}
             signModal={signModal}
+            array={array}
           />
 
           <Cards
