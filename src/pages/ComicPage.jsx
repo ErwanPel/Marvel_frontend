@@ -1,27 +1,60 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import "../assets/css/comicPage.css";
 
 export default function ComicPage() {
-  const location = useLocation();
+  const [comicData, setComicData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { description, thumbnail, title, _id } = location.state.data;
-  console.log(description, thumbnail, title, _id);
+  const location = useLocation();
+  const { comicId } = useParams();
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://site--marvel-backend--fwddjdqr85yq.code.run/comic/${comicId}`
+      );
+      setComicData(response.data);
+      console.log(comicData);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   let picture = "";
-  if (!thumbnail.path.match("image_not_available")) {
-    picture = `${thumbnail.path}/portrait_uncanny.${thumbnail.extension}`;
-  }
-  return (
+
+  useEffect(() => {
+    if (location.state) {
+      console.log("if");
+      setComicData(location.state.data);
+      setIsLoading(false);
+    } else {
+      console.log("else");
+      fetchData();
+    }
+  }, []);
+
+  return isLoading ? (
+    <p>Downloading...</p>
+  ) : (
     <main className="comic-page">
-      {description ? (
+      {comicData.description ? (
         <>
-          <h2>{title}</h2>
+          <h2>{comicData.title}</h2>
+
           <div className="comic-bloc">
-            <div>
-              <img src={picture} alt="" />
-            </div>
-            <p>{description}</p>
+            {!comicData.thumbnail.path.match("image_not_available") && (
+              <div>
+                <img
+                  src={`${comicData.thumbnail.path}/portrait_uncanny.${comicData.thumbnail.extension}`}
+                  alt=""
+                />
+              </div>
+            )}
+            <p>{comicData.description}</p>
           </div>
         </>
       ) : (

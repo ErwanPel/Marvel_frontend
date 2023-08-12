@@ -13,6 +13,7 @@ export default function Cards({
   cookiesComics,
   setCookiesComics,
   loginModal,
+  setLoginModal,
   signModal,
   cookiesSort,
   token,
@@ -48,30 +49,29 @@ export default function Cards({
 
   const handleFav = (id, favData, event) => {
     event.preventDefault();
-    if (token) {
-      if (favData?.title) {
-        if (cookiesComics.includes(id)) {
-          console.log("present");
-          deleteFav({ type: "comics", id: id });
-          const cookiesArray = [...cookiesComics];
-          cookiesArray.splice(cookiesArray.indexOf(id), 1);
-          setCookiesComics(cookiesArray);
-        } else {
-          sendFav({ comics: id });
-          setCookiesComics((cookiesComics) => [...cookiesComics, id]);
-        }
-        sendFav({ comics: id });
+
+    if (favData?.title) {
+      if (cookiesComics.includes(id)) {
+        console.log("present");
+        deleteFav({ type: "comics", id: id });
+        const cookiesArray = [...cookiesComics];
+        cookiesArray.splice(cookiesArray.indexOf(id), 1);
+        setCookiesComics(cookiesArray);
       } else {
-        if (cookiesChar.includes(id)) {
-          console.log("present");
-          deleteFav({ type: "characters", id: id });
-          const cookiesArray = [...cookiesChar];
-          cookiesArray.splice(cookiesArray.indexOf(id), 1);
-          setCookiesChar(cookiesArray);
-        } else {
-          sendFav({ characters: id });
-          setCookiesChar((cookiesChar) => [...cookiesChar, id]);
-        }
+        sendFav({ comics: id });
+        setCookiesComics((cookiesComics) => [...cookiesComics, id]);
+      }
+      sendFav({ comics: id });
+    } else {
+      if (cookiesChar.includes(id)) {
+        console.log("present");
+        deleteFav({ type: "characters", id: id });
+        const cookiesArray = [...cookiesChar];
+        cookiesArray.splice(cookiesArray.indexOf(id), 1);
+        setCookiesChar(cookiesArray);
+      } else {
+        sendFav({ characters: id });
+        setCookiesChar((cookiesChar) => [...cookiesChar, id]);
       }
     }
   };
@@ -123,6 +123,12 @@ export default function Cards({
   //   }
   // };
 
+  const displayModal = (event) => {
+    event.preventDefault();
+    console.log("ici");
+    setLoginModal(!loginModal);
+  };
+
   return (
     <main className="wrapper cards-bloc">
       {data.results.map((element) => {
@@ -146,7 +152,11 @@ export default function Cards({
                   ? "favorite"
                   : "favorite  full-heart")
               }
-              onClick={(event) => handleFav(element._id, element, event)}
+              onClick={
+                token
+                  ? (event) => handleFav(element._id, element, event)
+                  : displayModal
+              }
             >
               <FontAwesomeIcon className="heart" icon="fa-regular fa-heart" />
             </div>

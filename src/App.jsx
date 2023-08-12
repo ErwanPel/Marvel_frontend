@@ -32,6 +32,8 @@ function App() {
   const [loginModal, setLoginModal] = useState(false);
   const [signModal, setSignModal] = useState(false);
   const [token, setToken] = useState(Cookies.get("token") || "");
+  // cookiesChar and cookiesComics are use for save either for cookies navigator
+  // or database
   const [cookiesComics, setCookiesComics] = useState([]);
   const [cookiesChar, setCookiesChar] = useState([]);
 
@@ -59,6 +61,7 @@ function App() {
               token={token}
               cookiesChar={cookiesChar}
               setCookiesChar={setCookiesChar}
+              setLoginModal={setLoginModal}
             />
           }
         />
@@ -72,6 +75,7 @@ function App() {
               token={token}
               cookiesComics={cookiesComics}
               setCookiesComics={setCookiesComics}
+              setLoginModal={setLoginModal}
             />
           }
         />

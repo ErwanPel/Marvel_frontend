@@ -12,6 +12,7 @@ export default function CharactersPage({
   token,
   cookiesChar,
   setCookiesChar,
+  setLoginModal,
 }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,6 +92,7 @@ export default function CharactersPage({
             cookiesChar={cookiesChar}
             setCookiesChar={setCookiesChar}
             loginModal={loginModal}
+            setLoginModal={setLoginModal}
             signModal={signModal}
             path="/"
             cookiesSort={cookiesChar}
