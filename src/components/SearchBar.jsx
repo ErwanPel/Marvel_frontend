@@ -61,6 +61,9 @@ export default function SearchBar({
                         onClick={() => getItem(item)}
                         onFocus={() => setFocus(() => true)}
                         onBlur={() => setFocus(() => false)}
+                        onKeyUp={(event) => {
+                          event.code === "Enter" && getItem(item);
+                        }}
                       >
                         {item}
                       </div>
