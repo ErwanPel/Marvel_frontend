@@ -12,12 +12,16 @@ export default function AllComicsPage({
   token,
   cookiesComics,
   setCookiesComics,
+  autocompleteList,
+  setAutocompleteList,
 }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selectPage, setSelectPage] = useState();
+
+  let arrayAutocomplete = [];
 
   const fetchFav = async () => {
     try {
@@ -70,8 +74,6 @@ export default function AllComicsPage({
     fetchData();
   }, [search, page, cookiesComics]);
 
-  let array = [];
-
   return (
     <>
       {isLoading ? (
@@ -79,9 +81,9 @@ export default function AllComicsPage({
       ) : (
         <>
           {data.results.map((item) => {
-            array.push(item.title.split("(")[0].trim());
-            let sortArray = new Set(array);
-            array = Array.from(sortArray);
+            arrayAutocomplete.push(item.title.split("(")[0].trim());
+            let sortArray = new Set(arrayAutocomplete);
+            arrayAutocomplete = Array.from(sortArray);
           })}
           <SearchBar
             search={search}
@@ -93,7 +95,9 @@ export default function AllComicsPage({
             selectPage={selectPage}
             loginModal={loginModal}
             signModal={signModal}
-            array={array}
+            arrayAutocomplete={arrayAutocomplete}
+            autocompleteList={autocompleteList}
+            setAutocompleteList={setAutocompleteList}
           />
 
           <Cards
@@ -105,6 +109,7 @@ export default function AllComicsPage({
             path={/comic/}
             cookiesSort={cookiesComics}
             token={token}
+            setAutocompleteList={setAutocompleteList}
           />
         </>
       )}

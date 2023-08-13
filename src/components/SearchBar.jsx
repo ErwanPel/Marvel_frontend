@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 export default function SearchBar({
   search,
@@ -10,10 +11,15 @@ export default function SearchBar({
   selectPage,
   loginModal,
   signModal,
-  array,
+  arrayAutocomplete,
+  autocompleteList,
+  setAutocompleteList,
 }) {
+  const [hasFocus, setFocus] = useState(false);
+
   const getItem = (item) => {
     setSearch(() => item);
+    setAutocompleteList(false);
   };
 
   return (
@@ -23,6 +29,7 @@ export default function SearchBar({
           ? "search-page-bloc"
           : "search-page-bloc sticky-bloc"
       }
+      onClick={() => setAutocompleteList(false)}
     >
       <div className="search-bloc">
         <label htmlFor="search">{label}</label>
@@ -33,30 +40,36 @@ export default function SearchBar({
             id="search"
             placeholder={placeholder}
             onChange={(event) => {
+              setAutocompleteList(true);
               setSearch(event.target.value);
               setPage(1);
             }}
             value={search}
           />
-          <div className="autocomplete-list">
-            {array.map((item, index) => {
-              let regex = new RegExp(search, "i");
+          {autocompleteList && (
+            <div className="autocomplete-list">
+              {arrayAutocomplete.map((item, index) => {
+                let regex = new RegExp(search, "i");
 
-              if (search.length > 0) {
-                if (item.match(regex)) {
-                  return (
-                    <div
-                      className="item"
-                      key={index}
-                      onClick={() => getItem(item)}
-                    >
-                      {item}
-                    </div>
-                  );
+                if (search.length > 0) {
+                  if (item.match(regex)) {
+                    return (
+                      <div
+                        tabIndex={0}
+                        className="item"
+                        key={index}
+                        onClick={() => getItem(item)}
+                        onFocus={() => setFocus(() => true)}
+                        onBlur={() => setFocus(() => false)}
+                      >
+                        {item}
+                      </div>
+                    );
+                  }
                 }
-              }
-            })}
-          </div>
+              })}
+            </div>
+          )}
         </div>
       </div>
       <div className="select-bloc">

@@ -36,6 +36,7 @@ function App() {
   // or database
   const [cookiesComics, setCookiesComics] = useState([]);
   const [cookiesChar, setCookiesChar] = useState([]);
+  const [autocompleteList, setAutocompleteList] = useState(false);
 
   return (
     <Router>
@@ -50,6 +51,7 @@ function App() {
         setCookiesComics={setCookiesComics}
         cookiesChar={cookiesChar}
         setCookiesChar={setCookiesChar}
+        setAutocompleteList={setAutocompleteList}
       />
       <Routes>
         <Route
@@ -62,6 +64,8 @@ function App() {
               cookiesChar={cookiesChar}
               setCookiesChar={setCookiesChar}
               setLoginModal={setLoginModal}
+              autocompleteList={autocompleteList}
+              setAutocompleteList={setAutocompleteList}
             />
           }
         />
@@ -76,6 +80,8 @@ function App() {
               cookiesComics={cookiesComics}
               setCookiesComics={setCookiesComics}
               setLoginModal={setLoginModal}
+              autocompleteList={autocompleteList}
+              setAutocompleteList={setAutocompleteList}
             />
           }
         />

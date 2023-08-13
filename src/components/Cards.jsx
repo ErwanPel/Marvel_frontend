@@ -17,6 +17,7 @@ export default function Cards({
   signModal,
   cookiesSort,
   token,
+  setAutocompleteList,
 }) {
   // ----------------- METHOD TO SAVE WITH DATABASE -----------------------------
 
@@ -128,7 +129,10 @@ export default function Cards({
   };
 
   return (
-    <main className="wrapper cards-bloc">
+    <main
+      className="wrapper cards-bloc"
+      onClick={() => setAutocompleteList(false)}
+    >
       {data.results.length > 0 ? (
         data.results.map((element) => {
           let picture = `${element.thumbnail.path}/portrait_large.${element.thumbnail.extension}`;

@@ -1,7 +1,6 @@
 import Logo from "../assets/img/LogoMarvel.webp";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 import "../assets/css/header.css";
 
@@ -12,16 +11,19 @@ export default function Header({
   setSignModal,
   token,
   setToken,
-  cookiesChar,
   setCookiesChar,
-  cookiesComics,
   setCookiesComics,
+  setAutocompleteList,
 }) {
+  const navigate = useNavigate();
+
   const getSignUp = () => {
+    setAutocompleteList(false);
     setSignModal(!signModal);
   };
 
   const getLogin = () => {
+    setAutocompleteList(false);
     setLoginModal(!loginModal);
   };
 
@@ -50,12 +52,9 @@ export default function Header({
         </div>
 
         <div>
-          <Link to="/">
-            <button>PERSONNAGES</button>
-          </Link>
-          <Link to="/comics">
-            <button>COMICS</button>
-          </Link>
+          <button onClick={() => navigate("/")}>PERSONNAGES</button>
+
+          <button onClick={() => navigate("/comics")}>COMICS</button>
         </div>
       </div>
     </header>

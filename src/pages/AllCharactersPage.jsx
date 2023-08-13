@@ -13,6 +13,8 @@ export default function CharactersPage({
   cookiesChar,
   setCookiesChar,
   setLoginModal,
+  autocompleteList,
+  setAutocompleteList,
 }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +50,7 @@ export default function CharactersPage({
   //   }
   // }, [Cookies.get("characters")]);
 
-  let array = [];
+  let arrayAutocomplete = [];
 
   const fetchData = async () => {
     try {
@@ -79,9 +81,9 @@ export default function CharactersPage({
       ) : (
         <>
           {data.results.map((item) => {
-            array.push(item.name.split("(")[0].trim());
-            let sortArray = new Set(array);
-            array = Array.from(sortArray);
+            arrayAutocomplete.push(item.name.split("(")[0].trim());
+            let sortArray = new Set(arrayAutocomplete);
+            arrayAutocomplete = Array.from(sortArray);
           })}
           <SearchBar
             search={search}
@@ -93,7 +95,9 @@ export default function CharactersPage({
             selectPage={selectPage}
             loginModal={loginModal}
             signModal={signModal}
-            array={array}
+            arrayAutocomplete={arrayAutocomplete}
+            autocompleteList={autocompleteList}
+            setAutocompleteList={setAutocompleteList}
           />
           <Cards
             data={data}
@@ -105,6 +109,7 @@ export default function CharactersPage({
             path="/"
             cookiesSort={cookiesChar}
             token={token}
+            setAutocompleteList={setAutocompleteList}
           />
         </>
       )}
